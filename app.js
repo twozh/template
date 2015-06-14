@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+//use mongoose
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost/template");
+
 // view engine setup
 var views = [
     path.join(__dirname, 'main/views')
@@ -23,10 +27,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.use(express.static(path.join(__dirname, 'main/public')));
-var routes = require('./main/routes/index');
-var users = require('./main/routes/users');
+var routes = require('./main/routes/crud-api');
+var index = require('./main/routes/index');
+app.use('/', index);
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
