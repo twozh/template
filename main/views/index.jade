@@ -1,6 +1,50 @@
 extends layout
 
 block content
-  .container
-    h1= title
-    p Welcome to #{title}
+  .container#mainView
+    h1 template
+    p basic crud template
+    .list
+      table.table
+        thead
+          tr
+            th Name
+            th Time
+            th Dscr
+            th Image
+        tbody#mainViewList
+    button#mainViewAdd.btn.btn-default ADD
+ 
+  .container#addView(style="display:none")
+    form(name="addModel")
+      .form-header
+        h4 ADD
+      .form-body
+        .form-group
+          label.col-sm-2.control-label Name
+          .col-sm-10
+            input#addViewInName.form-control(required)
+        .form-group
+          label.col-sm-2.control-label Dscr
+          .col-sm-10
+            input#addViewInDscr.form-control(required)
+        .form-group
+          label.col-sm-2.control-label Image
+          .col-sm-10            
+              input#addViewInImage.form-control(required)            
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            button#addViewBtnCancel.btn.btn-default 取消
+            | &nbsp;
+            button#addViewBtnSave.btn.btn-default 保存
+            | &nbsp;
+            button#addViewBtnDelete.btn.btn-default 删除
+
+  script(type="text/template", id="model-template")
+    th <%- name %>
+    th <%- time %>
+    th <%- dscr %>
+    th <%- image %>
+
+
+

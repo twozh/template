@@ -18,6 +18,12 @@ var views = [
 app.set('views', views);
 app.set('view engine', 'jade');
 
+//use method-override
+var methodOverride = require('method-override');
+app.use(methodOverride('X-HTTP-Method'));          // Microsoft
+app.use(methodOverride('X-HTTP-Method-Override')); // Google/GData
+app.use(methodOverride('X-Method-Override'));      // IBM
+
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/main/public/favicon.ico'));
 app.use(logger('dev'));

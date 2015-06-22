@@ -3,7 +3,9 @@ var router = express.Router();
 var Model = require('./model.js');
 
 var createModel = function(req, res){
-	var model = new Model(req.body);
+	var data = req.body;	
+	data.time = Date.now();
+	var model = new Model(data);
 	model.save(function(err, m){
 		if (err){
 			console.log(err);
@@ -24,7 +26,7 @@ var retrieveModels = function(req, res){
 };
 
 var updateModel = function(req, res){
-	Model.findByIdAndUpdate(req.params.id, req.body, function(err, model){
+	Model.findByIdAndUpdate(req.params.id, req.body, {new:true}, function(err, model){
 		if (err){
 			console.log(err);
 			return res.status(403).send(err.message);
